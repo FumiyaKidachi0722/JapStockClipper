@@ -6,14 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write .",
-    "lint:fix": "eslint --fix ."
+    "lint": "eslint . --cache --cache-location .eslintcache",
+    "lint:fix": "eslint . --fix --cache --cache-location .eslintcache",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "firebase": "^10.12.4",
     "next": "^14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.52.1"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -28,6 +30,7 @@
     "eslint-plugin-jsx-a11y": "6.9.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "prettier": "3.3.3",
     "typescript": "4.9.5"
   }

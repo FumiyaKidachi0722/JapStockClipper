@@ -1,16 +1,47 @@
 // src/components/templates/Layout/index.tsx
-import React from 'react';
+
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+
+import styles from './Layout.module.css';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="p-4 bg-gray-800 text-white">Header</header>
-      <main className="flex-1 p-4">{children}</main>
-      <footer className="p-4 bg-gray-800 text-white">Footer</footer>
+    <div className={styles.container}>
+      <header
+        className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
+      >
+        <nav className={styles.nav}>
+          <Link href="/" className={styles.link}>
+            Home
+          </Link>
+          <Link href="/about" className={styles.link}>
+            About
+          </Link>
+          <Link href="/contact" className={styles.link}>
+            Contact
+          </Link>
+        </nav>
+      </header>
+      <main className={styles.main}>{children}</main>
+      <footer className={styles.footer}>Footer</footer>
     </div>
   );
 };

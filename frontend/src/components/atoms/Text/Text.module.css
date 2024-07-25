@@ -1,0 +1,6 @@
+/* frontend/src/components/atoms/Text/Text.module.css */
+
+.text {
+  color: #718096;
+  font-size: 0.875rem;
+}
