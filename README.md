@@ -108,7 +108,13 @@ JapStockClipper is designed to help users clip, store, and analyze Japanese stoc
    FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
    FIREBASE_APP_ID=your_app_id
    FIREBASE_MEASUREMENT_ID=your_measurement_id
+
+   JWT_SECRET=YOUR_GENERATED_SECRET_KEY
    ```
+
+   JWT_SECRET は`openssl rand -base64 32`で生成
+
+   keys フォルダを作成し秘密鍵を保存する
 
 8. Start the development server:
 

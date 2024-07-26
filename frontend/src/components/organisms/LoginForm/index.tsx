@@ -1,7 +1,5 @@
 // frontend/src/components/organisms/LoginForm/index.tsx
 
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -9,18 +7,17 @@ import { ErrorMessage } from '@/components/atoms/ErrorMessage';
 import { Heading } from '@/components/atoms/Heading';
 import { Label } from '@/components/atoms/Label';
 import { FormActions } from '@/components/molecules/FormActions';
-import { auth } from '@/firebase/initialize';
+import { useAuth } from '@/hooks/authService';
 
 import styles from './LoginForm.module.css';
 
 type Inputs = {
-  email: string;
+  userID: string;
   password: string;
 };
 
 export const LoginForm: React.FC = () => {
-  const router = useRouter();
-
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
@@ -28,39 +25,26 @@ export const LoginForm: React.FC = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log('user: ', user);
-        router.push('/');
-      })
-      .catch((error) => {
-        if (error.code === 'auth/invalid-credential') {
-          alert('入力された内容は正しくありません。');
-        } else {
-          alert(error.message);
-        }
-      });
+    await login(data.userID, data.password);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <Heading level={1} label="ログイン" />
       <div className={styles.formGroup}>
-        <Label htmlFor="email" text="Email" />
+        <Label htmlFor="userID" text="UserID" />
         <input
-          {...register('email', {
-            required: 'メールアドレスは必須です。',
+          {...register('userID', {
+            required: 'UserIDは必須です。',
             pattern: {
-              value:
-                /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
-              message: '不適切なメールアドレスです。',
+              value: /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/,
+              message: 'UserIDは英数字と記号のみ使用できます。',
             },
           })}
           type="text"
           className={styles.input}
         />
-        {errors.email && <ErrorMessage message={errors.email.message} />}
+        {errors.userID && <ErrorMessage message={errors.userID.message} />}
       </div>
       <div className={styles.formGroup}>
         <Label htmlFor="password" text="Password" />

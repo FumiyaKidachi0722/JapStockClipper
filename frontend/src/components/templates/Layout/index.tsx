@@ -1,14 +1,17 @@
-// src/components/templates/Layout/index.tsx
-
+import { jwtDecode } from 'jwt-decode';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FaSignInAlt, FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 
 import styles from './Layout.module.css';
 
 interface LayoutProps {
   children: React.ReactNode;
+}
+
+interface DecodedToken {
+  exp: number;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
@@ -27,13 +30,34 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     };
   }, []);
 
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('authToken');
+    setIsLoggedIn(false);
+    router.push('/auth/login');
+  }, [router]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      const currentTime = Date.now() / 1000;
+
+      if (decodedToken.exp > currentTime) {
+        setIsLoggedIn(true);
+        const timeout = (decodedToken.exp - currentTime) * 1000;
+        const timer = setTimeout(() => {
+          handleLogout();
+        }, timeout);
+
+        return () => clearTimeout(timer);
+      } else {
+        handleLogout();
+      }
+    }
+  }, [handleLogout]);
+
   const handleLogin = () => {
     router.push('/auth/login');
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
   };
 
   return (

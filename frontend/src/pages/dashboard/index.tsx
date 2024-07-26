@@ -1,35 +1,30 @@
-// frontend/src/pages/auth/login/index.tsx
-
+// frontend/src/pages/dashboard.tsx
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import { useEffect } from 'react';
 
-import { LoginForm } from '@/components/organisms/LoginForm';
+import { Heading } from '@/components/atoms/Heading';
 import { Layout } from '@/components/templates/Layout';
 import { useAuth } from '@/hooks/authService';
 
-import styles from './Login.module.css';
-
-const Login = () => {
+const Dashboard = () => {
   const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && isAuthenticated) {
-      router.push('/dashboard'); // ログインしている場合のリダイレクト先
+    if (!loading && !isAuthenticated) {
+      router.push('/auth/login'); // 未ログインの場合はログインページへリダイレクト
     }
   }, [loading, isAuthenticated, router]);
 
-  if (loading) {
+  if (loading || !isAuthenticated) {
     return <div>Loading...</div>; // 認証状態の確認中のローディング表示
   }
+
   return (
     <Layout>
-      <div className={styles.container}>
-        <LoginForm />
-      </div>
+      <Heading level={1} label="Dashboard" />
     </Layout>
   );
 };
 
-export default Login;
+export default Dashboard;
