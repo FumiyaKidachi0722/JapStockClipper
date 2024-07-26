@@ -13,6 +13,7 @@ JapStockClipper is a web application designed to clip and analyze Japanese stock
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
+- [Database Design](#database-design)
 
 ## Project Overview
 
@@ -48,17 +49,23 @@ JapStockClipper is designed to help users clip, store, and analyze Japanese stoc
 ### Installation Steps
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/JapStockClipper.git
    ```
+
 2. Navigate to the frontend project directory:
+
    ```bash
    cd JapStockClipper/frontend
    ```
+
 3. Install the dependencies:
+
    ```bash
    yarn install
    ```
+
 4. Setup Firebase:
 
    - Create a new Firebase project in the [Firebase Console](https://console.firebase.google.com/).
@@ -66,20 +73,51 @@ JapStockClipper is designed to help users clip, store, and analyze Japanese stoc
    - Add the Firebase configuration to your project.
 
 5. Navigate to the backend project directory:
+
    ```bash
    cd ../backend
    ```
+
 6. Install the dependencies:
+
    ```bash
    yarn install
    ```
-7. Start the development server:
+
+7. Environment Variables
+
+   Frontend
+
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
+   ```
+
+   Backend
+
+   ```env
+   FIREBASE_API_KEY=your_api_key
+   FIREBASE_AUTH_DOMAIN=your_auth_domain
+   FIREBASE_PROJECT_ID=your_project_id
+   FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   FIREBASE_APP_ID=your_app_id
+   FIREBASE_MEASUREMENT_ID=your_measurement_id
+   ```
+
+8. Start the development server:
 
    ```bash
    yarn start:dev
    ```
 
-8. Start the frontend development server:
+9. Start the frontend development server:
+
    ```bash
    cd ../frontend
    yarn dev
@@ -93,7 +131,7 @@ JapStockClipper is designed to help users clip, store, and analyze Japanese stoc
 
 ## File Structure
 
-```
+```plaintext
 JapStockClipper/
 ├── frontend/
 │   ├── public/
@@ -163,3 +201,53 @@ Contributions are welcome! Please fork the repository and create a pull request 
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Database Design
+
+このドキュメントは、プロジェクトで使用される Cloud Firestore データベースの構造を説明します。
+
+### Firestore コレクションとドキュメント
+
+#### コレクション: `users`
+
+`users`コレクションには、各ユーザーの情報が保存されます。`users`コレクション内の各ドキュメントは、Firebase Authentication によって提供される UID で識別される一意のユーザーに対応します。
+
+#### ドキュメント構造
+
+`users`コレクション内の各ドキュメントには、以下のフィールドが含まれます：
+
+- **role**: `number`（数値）
+
+  - 説明: ユーザーの権限を示します。
+  - 例: `0`（管理者）、`1`（一般ユーザー）、`2`（閲覧のみ）
+
+- **uid**: `string`（文字列）
+
+  - 説明: Firebase Authentication によって提供されるユーザーの一意の識別子。
+  - 例: `"xxxxxxxxxxxxxxxxxxxxxxxxxxxx"`
+
+- **userID**: `string`（文字列）
+
+  - 説明: ユーザーに割り当てられるユーザー ID。
+  - 例: `"test_user"`
+
+- **userName**: `string`（文字列）
+  - 説明: ユーザーの名前。
+  - 例: `"テスト太郎"`
+
+#### ドキュメントの例
+
+`users`コレクション内のドキュメントの例は以下のようになります：
+
+```json
+{
+  "role": 0,
+  "uid": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "userID": "test_user",
+  "userName": "テスト太郎"
+}
+```
+
+### 使用方法
+
+このデータベース構造により、ユーザー情報とその権限を保存することができます。ユーザーの権限に基づいて、アプリケーションの異なる部分へのアクセスを管理することが可能です。

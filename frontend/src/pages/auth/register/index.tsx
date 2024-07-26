@@ -3,14 +3,17 @@
 import React from 'react';
 
 import { RegisterForm } from '@/components/organisms/RegisterForm';
+import { Layout } from '@/components/templates/Layout';
 
 import styles from './Register.module.css';
 
 const Register = () => {
   return (
-    <div className={styles.container}>
-      <RegisterForm />
-    </div>
+    <Layout>
+      <div className={styles.container}>
+        <RegisterForm />
+      </div>
+    </Layout>
   );
 };
 
