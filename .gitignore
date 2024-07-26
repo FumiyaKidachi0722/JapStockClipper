@@ -20,10 +20,6 @@ logs
 out/
 build/
 
-# TailwindCSS
-*.css
-*.css.map
-
 # TypeScript
 *.tsbuildinfo
 
@@ -32,6 +28,9 @@ build/
 .cache/
 temp/
 *.local
+
+# Keys
+backend/keys/
 
 # Python
 # Byte-compiled / optimized / DLL files

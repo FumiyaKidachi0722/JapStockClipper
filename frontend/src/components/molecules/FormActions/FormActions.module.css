@@ -1,0 +1,35 @@
+/* frontend/src/components/molecules/FormActions/FormActions.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.linkText {
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+.link {
+  color: #4299e1;
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin-left: 0.25rem;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #2b6cb0;
+}

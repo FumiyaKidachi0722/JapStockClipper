@@ -1,17 +1,13 @@
 // src/pages/index.tsx
 import React from 'react';
+
+import { Heading } from '@/components/atoms/Heading';
 import { Layout } from '@/components/templates/Layout';
-import { Form } from '@/components/organisms/Form';
 
 const HomePage: React.FC = () => {
-  const handleSubmit = () => {
-    console.log('Form submitted');
-  };
-
   return (
     <Layout>
-      <h1 className="text-2xl font-bold">Welcome to JapStockClipper!</h1>
-      <Form onSubmit={handleSubmit} />
+      <Heading level={1} label="Welcome to JapStockClipper!" />
     </Layout>
   );
 };
