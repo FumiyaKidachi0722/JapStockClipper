@@ -1,0 +1,22 @@
+/* frontend/src/components/organisms/StockHistory/StockHistory.module.css */
+
+.stockHistory {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.stockHistory table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stockHistory th,
+.stockHistory td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.stockHistory th {
+  background-color: #f1f1f1;
+}

@@ -1,0 +1,16 @@
+/* frontend/src/components/organisms/RealTimePrice/RealTimePrice.module.css */
+
+.realTimePrice {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.realTimePrice h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.realTimePrice p {
+  margin: 5px 0;
+}

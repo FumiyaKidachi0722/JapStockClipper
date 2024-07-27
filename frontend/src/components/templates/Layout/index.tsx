@@ -70,11 +70,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link href="/" className={styles.link}>
               Home
             </Link>
-            <Link href="/about" className={styles.link}>
-              About
+            <Link href="/dashboard" className={styles.link}>
+              Dashboard
             </Link>
-            <Link href="/contact" className={styles.link}>
-              Contact
+            <Link href="/stock" className={styles.link}>
+              Stock
+            </Link>
+            <Link href="/news" className={styles.link}>
+              News
+            </Link>
+            <Link href="/finance" className={styles.link}>
+              Finance
             </Link>
           </div>
           <div className={styles.rightNav}>
