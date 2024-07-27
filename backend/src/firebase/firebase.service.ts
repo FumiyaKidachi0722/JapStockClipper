@@ -2,10 +2,10 @@
 
 import { Injectable } from '@nestjs/common';
 import {
-  initializeApp,
   applicationDefault,
-  getApps,
   getApp,
+  getApps,
+  initializeApp,
 } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 

@@ -1,9 +1,9 @@
 // backend/src/auth/firebase-auth.guard.ts
 
 import {
-  Injectable,
   CanActivate,
   ExecutionContext,
+  Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import * as admin from 'firebase-admin';

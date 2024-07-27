@@ -17,31 +17,29 @@ export const RealTimePrice: React.FC<RealTimePriceProps> = ({ symbol }) => {
   const [change, setChange] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchRealTimePrice = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/quote/${symbol}`);
-        const data = response.data;
-        if (
-          data &&
-          data.quoteResponse &&
-          data.quoteResponse.result.length > 0
-        ) {
-          const quote = data.quoteResponse.result[0];
-          setPrice(quote.regularMarketPrice);
-          setVolume(quote.regularMarketVolume);
-          setChange(quote.regularMarketChangePercent);
-        } else {
-          console.error('No data available for the given symbol.');
-        }
-      } catch (error) {
-        console.error('Error fetching real-time price:', error);
-      }
-    };
-
-    fetchRealTimePrice();
-    const interval = setInterval(fetchRealTimePrice, 60000);
-
-    return () => clearInterval(interval);
+    // const fetchRealTimePrice = async () => {
+    //   try {
+    //     const response = await axios.get(`${API_BASE_URL}/quote/${symbol}`);
+    //     const data = response.data;
+    //     if (
+    //       data &&
+    //       data.quoteResponse &&
+    //       data.quoteResponse.result.length > 0
+    //     ) {
+    //       const quote = data.quoteResponse.result[0];
+    //       setPrice(quote.regularMarketPrice);
+    //       setVolume(quote.regularMarketVolume);
+    //       setChange(quote.regularMarketChangePercent);
+    //     } else {
+    //       console.error('No data available for the given symbol.');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error fetching real-time price:', error);
+    //   }
+    // };
+    // fetchRealTimePrice();
+    // const interval = setInterval(fetchRealTimePrice, 60000);
+    // return () => clearInterval(interval);
   }, [symbol]);
 
   return (

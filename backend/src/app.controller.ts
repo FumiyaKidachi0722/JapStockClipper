@@ -1,13 +1,14 @@
-// backend/src/app.controller.ts
+import { Controller, Get, Param } from '@nestjs/common';
 
-import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  @Get('config')
-  getConfig() {
-    return {
-      frontendUrl: process.env.FRONTEND_URL,
-    };
+  constructor(private readonly appService: AppService) {}
+
+  @Get('stock_data/:symbol')
+  async getStockData(@Param('symbol') symbol: string): Promise<any> {
+    console.log('symbol: ', symbol);
+    return this.appService.getStockData(symbol);
   }
 }

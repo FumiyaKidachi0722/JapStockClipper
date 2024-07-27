@@ -1,16 +1,17 @@
 // backend/src/auth/auth.controller.ts
 
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
   InternalServerErrorException,
+  Post,
   UnauthorizedException,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
+
 import { CreateUserAuthDto } from '../common/dto/create-user-auth.dto';
-import { LoginDto } from '../common/dto/login.dto';
 import { CreateUserDbDto } from '../common/dto/create-user-db.dto';
+import { LoginDto } from '../common/dto/login.dto';
+import { AuthService } from './auth.service';
 
 @Controller('')
 export class AuthController {
