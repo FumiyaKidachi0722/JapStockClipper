@@ -1,16 +1,17 @@
 // backend/src/user/user.service.ts
 
 // backend/src/user/user.service.ts
-import { Injectable } from '@nestjs/common';
-import { FirebaseService } from '../firebase/firebase.service';
-import { CreateUserDbDto } from '../common/dto/create-user-db.dto';
-import { User } from '../common/interfaces/user.interface';
-import { UserNotFoundException } from '../common/exceptions/user-not-found.exception';
 import {
   CollectionReference,
-  QuerySnapshot,
   DocumentSnapshot,
+  QuerySnapshot,
 } from '@google-cloud/firestore';
+import { Injectable } from '@nestjs/common';
+
+import { CreateUserDbDto } from '../common/dto/create-user-db.dto';
+import { UserNotFoundException } from '../common/exceptions/user-not-found.exception';
+import { User } from '../common/interfaces/user.interface';
+import { FirebaseService } from '../firebase/firebase.service';
 
 @Injectable()
 export class UserService {

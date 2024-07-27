@@ -1,12 +1,13 @@
 // backend/src/auth/auth.service.ts
 
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from '../user/user.service';
+import * as bcrypt from 'bcrypt';
+import * as admin from 'firebase-admin';
+
 import { CreateUserDbDto } from '../common/dto/create-user-db.dto';
 import { User } from '../common/interfaces/user.interface';
-import * as admin from 'firebase-admin';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {

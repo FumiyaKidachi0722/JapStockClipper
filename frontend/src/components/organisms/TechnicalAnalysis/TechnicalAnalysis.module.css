@@ -1,0 +1,11 @@
+/* frontend/src/components/organisms/TechnicalAnalysis/TechnicalAnalysis.module.css */
+
+.technicalAnalysis {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.technicalAnalysis p {
+  margin: 5px 0;
+}

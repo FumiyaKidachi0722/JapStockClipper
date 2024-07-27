@@ -1,10 +1,11 @@
 // backend/src/user/user.controller.ts
 
-import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDbDto } from '../common/dto/create-user-db.dto';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateUserDbDto } from '../common/dto/create-user-db.dto';
 import { User } from '../common/interfaces/user.interface';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {

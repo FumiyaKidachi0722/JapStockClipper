@@ -1,10 +1,11 @@
 // backend/src/main.ts
 
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
 import * as admin from 'firebase-admin';
 import * as fs from 'fs';
+
+import { AppModule } from './app.module';
 
 dotenv.config();
 
